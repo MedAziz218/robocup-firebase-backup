@@ -77,4 +77,6 @@ if __name__=='__main__':
     if not arguments:
         main_loop()
     else:
-        while True:sleep(60)
+        while True:
+            print("pp")
+            sleep(60)
