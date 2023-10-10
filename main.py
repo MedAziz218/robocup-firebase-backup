@@ -58,6 +58,13 @@ def main_loop():
 
         sleep(60)
 
+def serve():
+    from waitress import serve
+    f = lambda: serve(app, host="0.0.0.0", port=5050)
+    # f = lambda: app.run(  debug=False, use_reloader=False)
+    threading.Thread(target=f,daemon=True).start()
+
+
 if __name__=='__main__':
-    threading.Thread(target=lambda: app.run(  debug=False, use_reloader=False),daemon=True).start()
+    serve()
     main_loop()
