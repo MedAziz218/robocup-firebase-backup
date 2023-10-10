@@ -56,7 +56,7 @@ def main_loop():
         except Exception as e:
             print(e)
 
-        sleep(5)
+        sleep(60)
 
 if __name__=='__main__':
     threading.Thread(target=lambda: app.run(  debug=False, use_reloader=False),daemon=True).start()
