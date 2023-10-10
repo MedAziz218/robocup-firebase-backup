@@ -9,7 +9,6 @@
     pip install pandas
 
     pip install Flask
-
 ```
 ### required credential files 
     Cred_firebase.json
