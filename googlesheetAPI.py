@@ -13,10 +13,11 @@ class GoogleSheetAPI:
     def update_teams_sheet(self,whole_data_string):
         json_data = json.loads(whole_data_string)
 
-        df= pd.DataFrame(data=json_data).T
+        df= pd.DataFrame(data=json_data['teams']).T
         df = df.rename_axis("TEAMS")
-
-        self.wks.set_dataframe(df,(2,2),copy_index=True, copy_head=True ) #(1,2) means :start from column 1 row 2
+        df_sorted = df.iloc[df.index.str.lower().argsort()]
+        # df_sorted = df.sort_index()
+        self.wks.set_dataframe(df_sorted,(2,2),copy_index=True, copy_head=True ) #(1,2) means :start from column 1 row 2
 
 
 

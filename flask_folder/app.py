@@ -1,4 +1,5 @@
 import os
+import time
 from flask import Flask, render_template, send_file
 
 app = Flask(__name__)
@@ -9,6 +10,16 @@ current_directory = os.getcwd()
 print("Current Working Directory:", current_directory)
 class FlaskAppConfig:
     FILES_DIR = current_directory+ ""
+    UPDATE_SHEET_FUNCTION = None
+def background_function():
+    if not FlaskAppConfig.UPDATE_SHEET_FUNCTION:
+        return "Something went Wrong (too soon)"
+    try:
+        FlaskAppConfig.UPDATE_SHEET_FUNCTION()
+    except:
+        return "Something went horribly Wrong"
+    
+    return "Sheet Updated Successfully"
 
 @app.route('/')
 def file_list():
@@ -32,12 +43,11 @@ def download_file(filename):
     # Return the file for download
     return send_file(file_path, as_attachment=True)
 
-@app.route('/updatesheet')
-def updatesheet():
-    # Construct the full path to the selected file
-    file_path = os.path.join(FlaskAppConfig.FILES_DIR)
-    # Return the file for download
-    return send_file(file_path, as_attachment=True)
+@app.route('/background_task', methods=['POST'])
+def start_background_task():
+    result = background_function()
+    return result
+
 
 
 #-------------- TEST --------------#

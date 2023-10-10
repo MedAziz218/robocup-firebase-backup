@@ -17,9 +17,17 @@
       <h1>RoboCup DataBase Backups</h1>
       <div class="sheet-buttons">
         <!-- <a href="{{ url_for('view_file', filename=file) }}" target="_blank">View</a> -->
-        <a href="https://docs.google.com/spreadsheets/d/1lJnZdtCsyRaKqX90dTWOUJY5Fam_xzHxvb_t9glanvY/edit?usp=sharing" target="_blank">View Sheet</a>
+        <a
+          href="https://docs.google.com/spreadsheets/d/1lJnZdtCsyRaKqX90dTWOUJY5Fam_xzHxvb_t9glanvY/edit?usp=sharing"
+          target="_blank"
+        >
+          <button class="green button-9">View Sheet</button>
+        </a>
 
-        <a href="{{ url_for('download_file', filename=file) }}">Update Sheet</a>
+        <button class="button-9" id="background-task-button">
+          Update Sheet
+        </button>
+        <p id="task-result"></p>
       </div>
       <ul class="file-list">
         {% for file in files %}
@@ -37,4 +45,25 @@
       </ul>
     </div>
   </body>
+
+  <script>
+    const backgroundTaskButton = document.getElementById(
+      "background-task-button"
+    );
+    const taskResult = document.getElementById("task-result");
+
+    backgroundTaskButton.addEventListener("click", () => {
+      backgroundTaskButton.setAttribute("disabled", true);
+      taskResult.innerText = "fetching ...";
+      fetch("/background_task", {
+        method: "POST",
+      })
+        .then((response) => response.text())
+        .then((data) => {
+          backgroundTaskButton.removeAttribute("disabled");
+
+          taskResult.innerText = data;
+        });
+    });
+  </script>
 </html>
