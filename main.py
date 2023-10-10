@@ -65,6 +65,16 @@ def serve():
     threading.Thread(target=f,daemon=True).start()
 
 
+
 if __name__=='__main__':
+    import sys
+    args = sys.argv
+    # The first argument (index 0) is the script name
+    script_name = args[0]
+    # The following arguments are the command-line arguments
+    arguments = args[1:]
     serve()
-    main_loop()
+    if not arguments:
+        main_loop()
+    else:
+        while True:sleep(60)
