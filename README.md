@@ -11,3 +11,8 @@
     pip install Flask
 
 ```
+### required credential files 
+    Cred_firebase.json
+    Cred_googlesheet.json
+
+<b> put them in the same directory as main.py </b>
