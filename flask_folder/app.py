@@ -32,6 +32,13 @@ def download_file(filename):
     # Return the file for download
     return send_file(file_path, as_attachment=True)
 
+@app.route('/updatesheet')
+def updatesheet():
+    # Construct the full path to the selected file
+    file_path = os.path.join(FlaskAppConfig.FILES_DIR)
+    # Return the file for download
+    return send_file(file_path, as_attachment=True)
+
 
 #-------------- TEST --------------#
 if __name__=='__main__':

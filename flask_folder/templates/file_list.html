@@ -15,6 +15,12 @@
   <body>
     <div class="main-div">
       <h1>RoboCup DataBase Backups</h1>
+      <div class="sheet-buttons">
+        <!-- <a href="{{ url_for('view_file', filename=file) }}" target="_blank">View</a> -->
+        <a href="https://docs.google.com/spreadsheets/d/1lJnZdtCsyRaKqX90dTWOUJY5Fam_xzHxvb_t9glanvY/edit?usp=sharing" target="_blank">View Sheet</a>
+
+        <a href="{{ url_for('download_file', filename=file) }}">Update Sheet</a>
+      </div>
       <ul class="file-list">
         {% for file in files %}
 

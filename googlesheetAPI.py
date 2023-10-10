@@ -1,37 +1,23 @@
 import pygsheets
 import pandas as pd
-main_json={
-    "login":{
+from backup_system import BackupSystem
+import os
+import json
 
-    },
-    "Teams":{
-        "Emanuel":{
-            "name":"Karim",
-            "last_name":"lazghab",
-            "pres":True,
-            "cin":12345678,
-        },
-        "Tactichhhh":{
-            "name":"Melek",
-            "last_name":"Khdira",
-            "pres":False,
-            "cin":87654321,
-        },
-        "Mazinos":{
-            "name": "Mazen",
-            "last_name": "aaouini",
-            "pres": True,
-            "cin": 54632178,
+class GoogleSheetAPI:
+    def __init__(self):
+        gc = pygsheets.authorize(service_file='Cred_googlesheet.json')# authentificat google sheet
+        sh = gc.open('robocup-sheet') #the parameter MUST be the same name that you fixed in the google sheet 
+        self.wks = sh[0] #this selects the first worksheet
 
-        }
-    }
-}
-gc = pygsheets.authorize(service_file='Cred_googlesheet.json')# 'silicon-garage-278511-bf125cd90f67.json' is my path to the json file
+    def update_teams_sheet(self,whole_data_string):
+        json_data = json.loads(whole_data_string)
 
-sh = gc.open('robocup-sheet') #the parameter MUST be the same name that you fixed in the google sheet 
+        df= pd.DataFrame(data=json_data).T
+        df = df.rename_axis("TEAMS")
 
-wks = sh[0] #this selects the first worksheet
+        self.wks.set_dataframe(df,(2,2),copy_index=True, copy_head=True ) #(1,2) means :start from column 1 row 2
 
-df=pd.DataFrame(data=main_json["Teams"])
 
-wks.set_dataframe(df,(1,2)) #(1,2) means :start from column 1 row 2
+
+
