@@ -1,0 +1,9 @@
+serviceAccountKey.json
+Cred_firebase.json
+Cred_googlesheet.json
+
+__pycache__
+Lib
+Scripts
+backups
+logs

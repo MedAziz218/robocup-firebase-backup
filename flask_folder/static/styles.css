@@ -1,0 +1,69 @@
+body {
+  margin: 0px;
+  
+}
+.main-div{
+    margin-top:10px ;
+    font-size: 1rem;
+}
+h1{
+    text-align: center;
+}
+.file-list {
+  border: solid 2px #007bff;
+  border-radius: 1%;
+  margin: 5px 10px;
+  list-style-type: none;
+  padding: 0;
+
+}
+.file-list .file-item {
+  color: green;
+  font-weight: bold;
+  margin:  0px auto;
+  margin-top: 0px;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+ 
+  width: 80%;
+  border-left: 1px solid gray ;
+  border-right: 1px solid gray ;
+
+
+}
+.file-list .file-item:last-child{
+    margin-bottom: 0px;
+}
+.file-list .file-item:not(:last-child){
+    border-bottom: 1px solid gray ;
+}
+.file-list .file-item:nth-child(odd){
+    background-color:  rgba(209, 209, 209, 0.488) ;
+}
+.file-item {
+  display: flex;
+  align-items: center;
+}
+
+.file-name {
+  flex-grow: 1;
+ 
+}
+
+.file-buttons {
+    padding: 10px 20px;
+  display: flex;
+}
+
+.file-buttons a {
+  margin-left: 10px;
+  text-decoration: none;
+  padding: 5px 10px ;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.file-buttons a:hover {
+  background-color: #0056b3;
+}
